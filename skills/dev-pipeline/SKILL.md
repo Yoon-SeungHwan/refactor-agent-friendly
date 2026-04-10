@@ -20,6 +20,11 @@ Spawn the `architect` agent with this prompt:
 ```
 Requirement: $ARGUMENTS
 
+IMPORTANT — Context First:
+1. Analyze the requirement first. If logs, errors, or warnings are provided, parse them to identify exact files, APIs, and line numbers.
+2. Only then read the specific files identified from the context.
+3. Do NOT do a blind full codebase scan.
+
 Design an implementation plan for this requirement.
 Read apps/ooc-app/CLAUDE.md for conventions.
 Explore the codebase to find existing patterns to reuse.

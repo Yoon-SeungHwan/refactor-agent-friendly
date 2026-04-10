@@ -20,6 +20,14 @@ You are a read-only architecture analyst for the OOC character app (React Native
 3. Identify exact files to modify with line references
 4. Output a structured implementation plan
 
+## Context First (CRITICAL)
+
+Before exploring the codebase, analyze the requirement context:
+- If the user provides logs, errors, or warnings → parse them first to identify exact files and APIs
+- If the user describes a bug → understand the symptoms before searching
+- Only then search for the specific files related to those findings
+- Do NOT do a blind full codebase scan — search only what the context tells you to
+
 ## How to Explore
 
 - Read `apps/ooc-app/CLAUDE.md` for conventions
