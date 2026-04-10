@@ -1,6 +1,6 @@
 # refactor-agent-friendly
 
-A Claude Code skill that analyzes and refactors any codebase for AI agent efficiency.
+A Claude Code plugin that analyzes and refactors any codebase for AI agent efficiency.
 
 Reduce context cost, improve convention compliance, and set up autonomous development infrastructure — measured with before/after benchmarks.
 
@@ -40,19 +40,25 @@ Tested on a React Native monorepo (80K+ lines, 32 features):
 
 ## Install
 
-### Option A: Copy the skill file
+### As a Claude Code plugin (recommended)
 
 ```bash
-mkdir -p .claude/skills/refactor-agent-friendly
-curl -o .claude/skills/refactor-agent-friendly/SKILL.md \
-  https://raw.githubusercontent.com/hwani6736/refactor-agent-friendly/main/SKILL.md
+claude plugin add hwani6736/refactor-agent-friendly
 ```
 
-### Option B: Clone and symlink
+This installs everything: the main skill, dev-pipeline skill, and 3 agents (architect, builder, reviewer).
+
+### Manual install
 
 ```bash
-git clone https://github.com/hwani6736/refactor-agent-friendly.git ~/.claude-skills/refactor-agent-friendly
-ln -s ~/.claude-skills/refactor-agent-friendly .claude/skills/refactor-agent-friendly
+git clone https://github.com/hwani6736/refactor-agent-friendly.git /tmp/raf
+
+# Copy skills
+cp -r /tmp/raf/skills/refactor-agent-friendly .claude/skills/
+cp -r /tmp/raf/skills/dev-pipeline .claude/skills/
+
+# Copy agents
+cp /tmp/raf/agents/*.md .claude/agents/
 ```
 
 ## Usage
@@ -65,8 +71,21 @@ ln -s ~/.claude-skills/refactor-agent-friendly .claude/skills/refactor-agent-fri
 
 The skill walks you through each phase interactively. It measures before making changes so you can see the exact improvement.
 
-## What Gets Created
+## What's Included
 
+**Plugin provides (installed automatically):**
+```
+agents/
+├── architect.md    # Read-only, opus, memory:project — designs plans
+├── builder.md      # Write-enabled, sonnet — implements code
+└── reviewer.md     # Read-only, opus, memory:project — reviews quality
+
+skills/
+├── refactor-agent-friendly/SKILL.md   # The main 9-phase workflow
+└── dev-pipeline/SKILL.md              # architect → builder → reviewer orchestration
+```
+
+**The skill creates in your project:**
 ```
 your-project/
 ├── .claude/
@@ -75,15 +94,8 @@ your-project/
 │   │   ├── screen-development.md
 │   │   ├── api-patterns.md
 │   │   └── ...
-│   ├── agents/                   # Role-based AI agents
-│   │   ├── architect.md          # Read-only, designs implementation plans
-│   │   ├── builder.md            # Writes code following plans
-│   │   └── reviewer.md           # Reviews for pattern compliance
-│   └── skills/
-│       └── dev-pipeline/         # Orchestrates architect → builder → reviewer
-│           └── SKILL.md
-├── CLAUDE.md                     # Optimized (under 300 lines)
-└── .claude/benchmark-report.md   # Before/after comparison
+│   └── benchmark-report.md       # Before/after comparison
+└── CLAUDE.md                     # Optimized (under 300 lines)
 ```
 
 ## Key Concepts

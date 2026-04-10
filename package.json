@@ -1,0 +1,19 @@
+{
+  "name": "refactor-agent-friendly",
+  "version": "1.0.0",
+  "description": "Make any codebase AI-agent efficient — rules, agents, pipeline, benchmark",
+  "author": "hwani6736",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hwani6736/refactor-agent-friendly"
+  },
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "ai-agent",
+    "developer-experience",
+    "codebase-optimization",
+    "context-engineering"
+  ]
+}
